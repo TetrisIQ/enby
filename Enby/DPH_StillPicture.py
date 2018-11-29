@@ -62,7 +62,7 @@ class Showiframe(object):
 		printl("", self , "S")
 
 		# we append here to have ctype.so also for sh4 boxes
-		libsFolder = config.plugins.dreamplex.pluginfolderpath.value + "libs"
+		libsFolder = config.plugins.enby.pluginfolderpath.value + "libs"
 		libname = ""
 
 		if self.boxInformation[2] == "sh4":
@@ -323,7 +323,7 @@ class StillPicture(Renderer, InfoBarBase):
 		printl("", self , "S")
 
 		if default is True:
-			self.stillpictureDefault = config.plugins.dreamplex.mediafolderpath.value + "/bootlogo.m1v"
+			self.stillpictureDefault = config.plugins.enby.mediafolderpath.value + "/bootlogo.m1v"
 
 		if self.stillpicture != value:
 			self.stillpicture = value

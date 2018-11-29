@@ -751,7 +751,7 @@ class BackgroundMediaSyncer(Thread):
 			resolutionString = "*1280x720_v2.jpg"
 			searchString = "1280x720_v2.jpg"
 
-		self.count = len(glob.glob1(config.plugins.dreamplex.mediafolderpath.value,resolutionString))
+		self.count = len(glob.glob1(config.plugins.enby.mediafolderpath.value,resolutionString))
 
 		msg_text = _("\n\nFiles found: ") + str(self.count)
 		self.messages.push((THREAD_WORKING, msg_text))
@@ -761,7 +761,7 @@ class BackgroundMediaSyncer(Thread):
 
 		if int(self.count) > 0:
 			self.currentIndex = 0
-			for myFile in glob.glob1(config.plugins.dreamplex.mediafolderpath.value,resolutionString):
+			for myFile in glob.glob1(config.plugins.enby.mediafolderpath.value,resolutionString):
 				sleep(0.2)
 				self.currentIndex += 1
 				if self.cancel:
@@ -774,7 +774,7 @@ class BackgroundMediaSyncer(Thread):
 						extension = str.upper(myFile[-3:])
 						if extension == "JPG":
 							extension = "JPEG"
-						imageLocationWoExtension = config.plugins.dreamplex.mediafolderpath.value + myFileWoExtension
+						imageLocationWoExtension = config.plugins.enby.mediafolderpath.value + myFileWoExtension
 
 						# location string
 						videoLocation = imageLocationWoExtension + ".m1v"
@@ -790,7 +790,7 @@ class BackgroundMediaSyncer(Thread):
 							self.messagePump.send(0)
 
 							# now we check if we are are jpeg or png
-							imageLocation = config.plugins.dreamplex.mediafolderpath.value + myFile
+							imageLocation = config.plugins.enby.mediafolderpath.value + myFile
 
 							i = Image.open(imageLocation)
 
@@ -1128,7 +1128,7 @@ class BackgroundMediaSyncer(Thread):
 				t_postfix = variant[2]
 
 				# location string
-				location = config.plugins.dreamplex.mediafolderpath.value + str(self.prefix) + "_" +  str(media[1]["ratingKey"]) + str(t_postfix)
+				location = config.plugins.enby.mediafolderpath.value + str(self.prefix) + "_" +  str(media[1]["ratingKey"]) + str(t_postfix)
 
 				# check if backdrop exists
 				if fileExists(location):
@@ -1154,7 +1154,7 @@ class BackgroundMediaSyncer(Thread):
 				t_postfix = variant[2]
 
 				# location string
-				location = config.plugins.dreamplex.mediafolderpath.value + str(self.prefix) + "_" +  str(media[1]["ratingKey"]) + str(t_postfix)
+				location = config.plugins.enby.mediafolderpath.value + str(self.prefix) + "_" +  str(media[1]["ratingKey"]) + str(t_postfix)
 
 				# check if poster exists
 				if fileExists(location):

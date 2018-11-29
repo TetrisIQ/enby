@@ -264,7 +264,7 @@ class RemoteHandler(BaseHTTPRequestHandler):
 				machineIdentifier = params["machineIdentifier"]
 				printl("target machineIdentifier: " + str(machineIdentifier), self, "D")
 
-				for serverConfig in config.plugins.dreamplex.Entries:
+				for serverConfig in config.plugins.enby.Entries:
 					printl("current machineIdentifier: " + str(serverConfig.machineIdentifier.value), self, "D")
 
 					if machineIdentifier in serverConfig.machineIdentifier.value:
@@ -349,7 +349,7 @@ class RemoteHandler(BaseHTTPRequestHandler):
 	def getResourceXml(self):
 		printl("", self, "S")
 
-		xml = "<MediaContainer><Player protocolCapabilities='playback, navigation' product='"+ getMyIp() +"' platformVersion='"+ getVersion() +"' platform='Enigma2' machineIdentifier='"+ getUUID() +"' title='"+ config.plugins.dreamplex.boxName.value +"' protocolVersion='1' deviceClass='stb'/></MediaContainer>"
+		xml = "<MediaContainer><Player protocolCapabilities='playback, navigation' product='"+ getMyIp() +"' platformVersion='"+ getVersion() +"' platform='Enigma2' machineIdentifier='"+ getUUID() +"' title='"+ config.plugins.enby.boxName.value +"' protocolVersion='1' deviceClass='stb'/></MediaContainer>"
 
 		printl("", self, "C")
 		return xml

@@ -91,7 +91,7 @@ def printl2(string, parent=None, dmode="U", obfuscate=False, steps=4):
 	@return: none
 	"""
 
-	debugMode = config.plugins.dreamplex.debugMode.value
+	debugMode = config.plugins.enby.debugMode.value
 
 	if debugMode:
 
@@ -121,39 +121,39 @@ def printl2(string, parent=None, dmode="U", obfuscate=False, steps=4):
 				out = str(parent) + " -> " + str(string)
 
 		if dmode == "E":
-			print "[DreamPlex] " + "E" + "  " + str(out)
+			print "[Enby] " + "E" + "  " + str(out)
 			writeToLog(dmode, out)
 
 		elif dmode == "W":
-			print "[DreamPlex] " + "W" + "  " + str(out)
+			print "[Enby] " + "W" + "  " + str(out)
 			writeToLog(dmode, out)
 
 		elif dmode == "I":
-			print "[DreamPlex] " + "I" + "  " + str(out)
+			print "[Enby] " + "I" + "  " + str(out)
 			writeToLog(dmode, out)
 
 		elif dmode == "D":
-			print "[DreamPlex] " + "D" + "  " + str(out)
+			print "[Enby] " + "D" + "  " + str(out)
 			writeToLog(dmode, out)
 
 		elif dmode == "S":
-			print "[DreamPlex] " + "S" + "  " + str(out) + STARTING_MESSAGE
+			print "[Enby] " + "S" + "  " + str(out) + STARTING_MESSAGE
 			writeToLog(dmode, out + STARTING_MESSAGE)
 
 		elif dmode == "C":
-			print "[DreamPlex] " + "C" + "  " + str(out) + CLOSING_MESSAGE
+			print "[Enby] " + "C" + "  " + str(out) + CLOSING_MESSAGE
 			writeToLog(dmode, out + CLOSING_MESSAGE)
 
 		elif dmode == "U":
-			print "[DreamPlex] " + "U  specify me!!!!!" + "  " + str(out)
+			print "[Enby] " + "U  specify me!!!!!" + "  " + str(out)
 			writeToLog(dmode, out)
 
 		elif dmode == "X":
-			print "[DreamPlex] " + "D" + "  " + str(out)
+			print "[Enby] " + "D" + "  " + str(out)
 			writeToLog(dmode, out)
 
 		else:
-			print "[DreamPlex] " + "OLD CHARACTER CHANGE ME !!!!!" + "  " + str(out)
+			print "[Enby] " + "OLD CHARACTER CHANGE ME !!!!!" + "  " + str(out)
 
 #===============================================================================
 #
@@ -202,7 +202,7 @@ def getSkinResolution():
 #===============================================================================
 def revokeCacheFiles():
 	printl2("", "__common__::revokeCacheFiles", "S")
-	cachePath = config.plugins.dreamplex.cachefolderpath.value
+	cachePath = config.plugins.enby.cachefolderpath.value
 
 	try:
 		os.chdir(cachePath)
@@ -228,7 +228,7 @@ def writeToLog(dmode, out):
 	@param out: message string
 	@return: none
 	"""
-	if config.plugins.dreamplex.writeDebugFile.value:
+	if config.plugins.enby.writeDebugFile.value:
 		try:
 			instance = Singleton()
 			if instance.getLogFileInstance() is "":
@@ -244,8 +244,8 @@ def writeToLog(dmode, out):
 			gLogFile.flush()
 
 		except Exception, ex:
-			config.plugins.dreamplex.writeDebugFile.value = False
-			config.plugins.dreamplex.debugMode.save()
+			config.plugins.enby.writeDebugFile.value = False
+			config.plugins.enby.debugMode.save()
 
 			printl2("Exception(" + str(type(ex)) + "): " + str(ex), "__common__::writeToLog", "E")
 
@@ -258,17 +258,17 @@ def openLogFile():
 	"""
 	#printl2("", "openLogFile", "S")
 
-	logDir = config.plugins.dreamplex.logfolderpath.value
+	logDir = config.plugins.enby.logfolderpath.value
 
 	try:
-		if os.path.exists(logDir + "dreamplex_former.log"):
-			os.remove(logDir + "dreamplex_former.log")
+		if os.path.exists(logDir + "enby_former.log"):
+			os.remove(logDir + "enby_former.log")
 
-		if os.path.exists(logDir + "dreamplex.log"):
-			shutil.copy2(logDir + "dreamplex.log", logDir + "dreamplex_former.log")
+		if os.path.exists(logDir + "enby.log"):
+			shutil.copy2(logDir + "enby.log", logDir + "enby_former.log")
 
 		instance = Singleton()
-		instance.getLogFileInstance(open(logDir + "dreamplex.log", "w"))
+		instance.getLogFileInstance(open(logDir + "enby.log", "w"))
 
 	except Exception, ex:
 		printl2("Exception(" + str(type(ex)) + "): " + str(ex), "openLogFile", "E")
@@ -454,12 +454,12 @@ def checkPlexEnvironment():
 	"""
 	printl2("", "__common__::checkPlexEnvironment", "S")
 
-	playerTempFolder = config.plugins.dreamplex.playerTempPath.value
-	logFolder = config.plugins.dreamplex.logfolderpath.value
-	mediaFolder = config.plugins.dreamplex.mediafolderpath.value
-	configFolder = config.plugins.dreamplex.configfolderpath.value
-	cacheFolder = config.plugins.dreamplex.cachefolderpath.value
-	homeUsersFolder = config.plugins.dreamplex.configfolderpath.value + "homeUsers"
+	playerTempFolder = config.plugins.enby.playerTempPath.value
+	logFolder = config.plugins.enby.logfolderpath.value
+	mediaFolder = config.plugins.enby.mediafolderpath.value
+	configFolder = config.plugins.enby.configfolderpath.value
+	cacheFolder = config.plugins.enby.cachefolderpath.value
+	homeUsersFolder = config.plugins.enby.configfolderpath.value + "homeUsers"
 
 	checkDirectory(playerTempFolder)
 	checkDirectory(logFolder)
@@ -1046,7 +1046,7 @@ def getPlexHeader(g_sessionID, asDict = True):
 	printl2("", "__common__::getPlexHeader", "S")
 
 	boxData = getBoxInformation()
-	boxName = config.plugins.dreamplex.boxName.value
+	boxName = config.plugins.enby.boxName.value
 
 	# why do we use ios!!!!! instead of enigma
 	# Unable to find client profile for device; platform=Enigma, platformVersion=oe20, device=Dreambox, model=500hd
@@ -1054,15 +1054,15 @@ def getPlexHeader(g_sessionID, asDict = True):
 
 	if asDict:
 		plexHeader={'X-Plex-Platform': "iOS",
-					'X-Plex-Platform-Version': boxData[3],
-					'X-Plex-Provides': "player",
-					'X-Plex-Product': "DreamPlex",
-					'X-Plex-Version': getVersion(),
-					'X-Plex-Device': boxData[0],
-					'X-Plex-Device-Name': boxName,
-					'X-Plex-Model': boxData[1],
-					'X-Plex-Client-Identifier': g_sessionID,
-					'X-Plex-Client-Platform': "iOS"}
+				'X-Plex-Platform-Version': boxData[3],
+				'X-Plex-Provides': "player",
+				'X-Plex-Product': "DreamPlex",
+				'X-Plex-Version': getVersion(),
+				'X-Plex-Device': boxData[0],
+				'X-Plex-Device-Name': boxName,
+				'X-Plex-Model': boxData[1],
+				'X-Plex-Client-Identifier': g_sessionID,
+				'X-Plex-Client-Platform': "iOS"}
 	else:
 		plexHeader = []
 		plexHeader.append('X-Plex-Platform:iOS')# + boxData[2]) # arch
@@ -1175,7 +1175,7 @@ def getPlexHeaders():
 		"X-Plex-Client-Identifier": getUUID(),
 		"X-Plex-Provides": "player",
 		"X-Plex-Product": "DreamPlex",
-		"X-Plex-Device-Name": config.plugins.dreamplex.boxName.value,
+		"X-Plex-Device-Name": config.plugins.enby.boxName.value,
 		"X-Plex-Platform": "Enigma2",
 		"X-Plex-Model": "Enigma2",
 		"X-Plex-Device": "stb",

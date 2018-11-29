@@ -81,7 +81,7 @@ class DPS_Mappings(Screen):
 		
 		self.guiElements = getGuiElements()
 
-		self.location = config.plugins.dreamplex.configfolderpath.value + "mountMappings"
+		self.location = config.plugins.enby.configfolderpath.value + "mountMappings"
 
 		checkXmlFile(self.location)
 
@@ -218,7 +218,7 @@ class DPS_MappingsEntryList(MenuList):
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
 
-		self.location = config.plugins.dreamplex.configfolderpath.value + "mountMappings"
+		self.location = config.plugins.enby.configfolderpath.value + "mountMappings"
 
 		printl("", self, "C")
 		

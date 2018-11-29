@@ -86,7 +86,7 @@ class DPS_About(Screen):
 	def getLeftText(self):
 		printl("", self, "S")
 
-		if config.plugins.dreamplex.remoteAgent.value:
+		if config.plugins.enby.remoteAgent.value:
 			state, information = getHttpDeamonInformation()
 		
 		content = ""
@@ -102,7 +102,7 @@ class DPS_About(Screen):
 		content += "\t rossi2000 \n"
 		content += "\n\nIf you like my work you can buy me a beer :-) \n\ndondavici@gmail.com"
 
-		if config.plugins.dreamplex.remoteAgent.value:
+		if config.plugins.enby.remoteAgent.value:
 			content += "\n\nRemotePlayer: " + str(information)
 
 		printl("", self, "C")

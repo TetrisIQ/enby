@@ -81,7 +81,7 @@ class DPS_Users(Screen):
 		self.guiElements = getGuiElements()
 		self.plexInstance = plexInstance
 
-		self.location = config.plugins.dreamplex.configfolderpath.value + "homeUsers"
+		self.location = config.plugins.enby.configfolderpath.value + "homeUsers"
 
 		checkXmlFile(self.location)
 
@@ -296,7 +296,7 @@ class DPS_UsersEntryList(MenuList):
 		self.l.setFont(0, gFont("Regular", 20))
 		self.l.setFont(1, gFont("Regular", 18))
 
-		self.location = config.plugins.dreamplex.configfolderpath.value + "homeUsers"
+		self.location = config.plugins.enby.configfolderpath.value + "homeUsers"
 
 		printl("", self, "C")
 		

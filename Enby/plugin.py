@@ -50,9 +50,9 @@ def DPS_MainMenu(*args, **kwargs):
 #
 #===========================================================================
 #noinspection PyUnusedLocal
-def menu_dreamplex(menuid, **kwargs):
+def menu_enby(menuid, **kwargs):
 	if menuid == "mainmenu":
-		return [(_("DreamPlex"), main, "dreamplex", 47)]
+		return [(_("Enby"), main, "enby", 47)]
 	return []
 
 #===========================================================================
@@ -66,12 +66,12 @@ def Autostart(reason, session=None, **kwargs):
 		getUUID()
 
 	else:
-		config.plugins.dreamplex.entriescount.save()
-		config.plugins.dreamplex.Entries.save()
-		config.plugins.dreamplex.save()
+		config.plugins.enby.entriescount.save()
+		config.plugins.enby.Entries.save()
+		config.plugins.enby.save()
 		configfile.save()
 
-		if config.plugins.dreamplex.remoteAgent.value and HttpDeamonStarted:
+		if config.plugins.enby.remoteAgent.value and HttpDeamonStarted:
 			HttpDeamonThread.stopRemoteDeamon()
 
 #===========================================================================
@@ -300,7 +300,7 @@ def sessionStart(reason, **kwargs):
 		global global_session
 		global_session = kwargs["session"]
 
-		if config.plugins.dreamplex.remoteAgent.value:
+		if config.plugins.enby.remoteAgent.value:
 			startRemoteDeamon()
 
 		# load skin data here as well
@@ -322,7 +322,7 @@ def Plugins(**kwargs):
 	myList.append(PluginDescriptor(where = PluginDescriptor.WHERE_AUTOSTART, fnc = Autostart))
 	myList.append(PluginDescriptor(where = PluginDescriptor.WHERE_SESSIONSTART, fnc = sessionStart))
 
-	if config.plugins.dreamplex.showInMainMenu.value:
-		myList.append(PluginDescriptor(name="Enby", description=_("Emby Client for Enigma2 based on DreamPlex"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_dreamplex))
+	if config.plugins.enby.showInMainMenu.value:
+		myList.append(PluginDescriptor(name="Enby", description=_("Emby Client for Enigma2 based on DreamPlex"), where = [PluginDescriptor.WHERE_MENU], fnc=menu_enby))
 
 	return myList
