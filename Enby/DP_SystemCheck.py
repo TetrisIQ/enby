@@ -83,7 +83,7 @@ class DPS_SystemCheck(Screen):
 		vlist.append((_("Check python textutils installation data."), "python-textutils"))
 		vlist.append((_("Check curl installation data."), "curl"))
 
-		if config.plugins.dreamplex.showUpdateFunction.value:
+		if config.plugins.enby.showUpdateFunction.value:
 			vlist.append((_("Check for update."), "check_Update"))
 
 		vlist.append((_("Revoke cache files manually"), "revoke_cache"))
@@ -159,7 +159,7 @@ class DPS_SystemCheck(Screen):
 			isBeta = self.checkIfBetaVersion(latestVersion)
 			printl("isBeta: " + str(isBeta), self, "D")
 
-			if config.plugins.dreamplex.updateType.value == "1" and isBeta == True: # Stable
+			if config.plugins.enby.updateType.value == "1" and isBeta == True: # Stable
 				latestVersion = self.searchLatestStable()
 
 			if latestVersion > installedVersion:
@@ -242,7 +242,7 @@ class DPS_SystemCheck(Screen):
 	def updateToLatestVersion(self):
 		printl("", self, "S")
 
-		if config.plugins.dreamplex.updateType.value == "1":
+		if config.plugins.enby.updateType.value == "1":
 			updateType = "Stable"
 		else:
 			updateType = "Beta"

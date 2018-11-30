@@ -102,7 +102,7 @@ class DPS_MainMenu(DPH_Screen, DPH_HorizontalMenu, DPH_ScreenHelper):
 				"cancel":	(self.cancel, ""),
 			}, -2)
 		
-		if config.plugins.dreamplex.stopLiveTvOnStartup.value:
+		if config.plugins.enby.stopLiveTvOnStartup.value:
 			self.session.nav.stopService()
 
 		self.onFirstExecBegin.append(self.onExec)
@@ -367,7 +367,7 @@ class DPS_MainMenu(DPH_Screen, DPH_HorizontalMenu, DPH_ScreenHelper):
 		if self.selectionOverride is not None:
 			self.okbuttonClick()
 
-		if config.plugins.dreamplex.checkForUpdateOnStartup.value and not self.checkedForUpdates:
+		if config.plugins.enby.checkForUpdateOnStartup.value and not self.checkedForUpdates:
 			DPS_SystemCheck(self.session).checkForUpdate(silent=True)
 			self.checkedForUpdates = True
 
@@ -381,7 +381,7 @@ class DPS_MainMenu(DPH_Screen, DPH_HorizontalMenu, DPH_ScreenHelper):
 			self.mainMenuList = []
 
 			# add servers to list
-			for serverConfig in config.plugins.dreamplex.Entries:
+			for serverConfig in config.plugins.enby.Entries:
 
 				# only add the server if state is active
 				if serverConfig.state.value:

@@ -197,4 +197,3 @@ class DPS_ViewMusic(DP_View):
 		super(DPS_ViewMusic,self).onEnter()
 
 		printl("", self, "C")
-

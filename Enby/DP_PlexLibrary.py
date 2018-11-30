@@ -98,7 +98,7 @@ class PlexLibrary(Screen):
 	g_skipmetadata = "false" # best understanding when looking getMoviesfromsection
 	g_skipmediaflags = "false" # best understanding when looking getMoviesfromsection
 	g_skipimages = "false"
-	g_loc = "/usr/lib/enigma2/python/Plugins/Extensions/DreamPlex" # homeverzeichnis
+	g_loc = "/usr/lib/enigma2/python/Plugins/Extensions/Enby" # homeverzeichnis
 	g_myplex_username = ""
 	g_myplex_password = ""
 	serverConfig_myplexToken = ""
@@ -155,8 +155,8 @@ class PlexLibrary(Screen):
 		self.g_serverConfig = serverConfig
 				
 		# global settings
-		self.g_useFilterSections = config.plugins.dreamplex.showFilter.value
-		self.g_showUnSeenCounts = config.plugins.dreamplex.showUnSeenCounts.value
+		self.g_useFilterSections = config.plugins.enby.showFilter.value
+		self.g_showUnSeenCounts = config.plugins.enby.showUnSeenCounts.value
 		self.g_sessionID = getUUID()
 		
 		# server settings
@@ -174,7 +174,7 @@ class PlexLibrary(Screen):
 
 		self.setPlaybackType(self.serverConfig_playbackType)
 
-		printl("using this debugMode: " + str(config.plugins.dreamplex.debugMode.value), self, "D")
+		printl("using this debugMode: " + str(config.plugins.enby.debugMode.value), self, "D")
 		printl("using this serverName: " +  self.serverConfig_Name, self, "I")
 		printl("using this connectionType: " +  self.serverConfig_connectionType, self, "I")
 
@@ -274,7 +274,7 @@ class PlexLibrary(Screen):
 		entryData = None
 
 		self.sectionCacheLoaded = False
-		if config.plugins.dreamplex.useCache.value:
+		if config.plugins.enby.useCache.value:
 			# load section cache
 			self.loadSectionCache()
 
@@ -289,7 +289,7 @@ class PlexLibrary(Screen):
 
 			printl("entries: " + str(entries),self, "D")
 
-			summerizeServers = config.plugins.dreamplex.summerizeServers.value
+			summerizeServers = config.plugins.enby.summerizeServers.value
 
 			if summerizeServers and not serverFilterActive and self.serverConfig_connectionType == "2":
 
@@ -329,7 +329,7 @@ class PlexLibrary(Screen):
 
 					# set the source for the section data
 					source = "plex"
-					if config.plugins.dreamplex.useCache.value:
+					if config.plugins.enby.useCache.value:
 						source = self.updateSectionCache(entryData)
 
 					entryData["source"] =source
@@ -357,13 +357,13 @@ class PlexLibrary(Screen):
 
 					# if this is a myPlex connection we look if we should provide more information for better overview since myplex combines all servers and shares
 					detail = ""
-					if config.plugins.dreamplex.showDetailsInList.value and self.serverConfig_connectionType == "2":
-						if config.plugins.dreamplex.showDetailsInListDetailType.value == "1":
+					if config.plugins.enby.showDetailsInList.value and self.serverConfig_connectionType == "2":
+						if config.plugins.enby.showDetailsInListDetailType.value == "1":
 							if "sourceTitle" in entryData:
 								detail = " \n( " + entryData['sourceTitle'] + ")"
 							else:
 								detail = " \n(" + str(entryData['serverName']) + ")"
-						elif config.plugins.dreamplex.showDetailsInListDetailType.value == "2":
+						elif config.plugins.enby.showDetailsInListDetailType.value == "2":
 							if "serverName" in entryData:
 								detail = " \n(" + str(entryData['serverName']) + ")"
 
@@ -428,7 +428,7 @@ class PlexLibrary(Screen):
 					recentlyAdded["nextViewMode"] = "mixed"
 					fullList.append((_("New"), getPlugin("mixed", Plugin.MENU_MIXED), "mixedEntry", recentlyAdded))
 
-					if config.plugins.dreamplex.useCache.value:
+					if config.plugins.enby.useCache.value:
 						self.saveSectionCache()
 
 			# as a last step we check if there where any content
@@ -481,7 +481,7 @@ class PlexLibrary(Screen):
 				else:
 					entryData["contentUrl"] = incomingEntryData["contentUrl"] + "/" + entryData["key"]
 
-					if config.plugins.dreamplex.useCache.value:
+					if config.plugins.enby.useCache.value:
 						# we set this here now to have this information later
 						if self.g_sectionCache.has_key(self.currentUuid):
 							entryData["source"] = self.g_sectionCache[self.currentUuid]["source"]
@@ -1069,7 +1069,7 @@ class PlexLibrary(Screen):
 	def loadSectionCache(self):
 		printl("", self, "S")
 
-		self.sectionCache = "%s%s.cache" % (config.plugins.dreamplex.cachefolderpath.value, "sections", )
+		self.sectionCache = "%s%s.cache" % (config.plugins.enby.cachefolderpath.value, "sections", )
 		try:
 			fd = open(self.sectionCache, "rb")
 			self.g_sectionCache = pickle.load(fd)
@@ -1437,7 +1437,7 @@ class PlexLibrary(Screen):
 			#check if the file can be found locally
 			if myType == "unixfile" or myType == "winfile" or myType == "UNC":
 
-				tree = getXmlContent(config.plugins.dreamplex.configfolderpath.value + "mountMappings")
+				tree = getXmlContent(config.plugins.enby.configfolderpath.value + "mountMappings")
 
 				self.serverID = str(self.g_serverConfig.id.value)
 				printl("serverID: " + str(self.serverID), self, "D")

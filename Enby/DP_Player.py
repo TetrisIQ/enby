@@ -1104,10 +1104,10 @@ class DP_Player(Screen, InfoBarBase, InfoBarShowHide, InfoBarCueSheetSupport,
 	def exitFunction(self):
 		printl("", self, "S")
 
-		if config.plugins.dreamplex.exitFunction.value == "2":
+		if config.plugins.enby.exitFunction.value == "2":
 			self.close((True, (self.playerData,self.ptr, self.id, self.currentIndex)))
 
-		elif config.plugins.dreamplex.exitFunction.value == "1":
+		elif config.plugins.enby.exitFunction.value == "1":
 			self.leavePlayer()
 
 		printl("", self, "C")
@@ -1127,7 +1127,7 @@ class DP_Player(Screen, InfoBarBase, InfoBarShowHide, InfoBarCueSheetSupport,
 		if self.playbackType == "1":
 			self.stopTranscoding()
 
-		if config.plugins.dreamplex.lcd4linux.value:
+		if config.plugins.enby.lcd4linux.value:
 			remove(self.tempPoster)
 
 		# we destroy here all variables to be sure that they are away
@@ -1532,7 +1532,7 @@ class DP_Player(Screen, InfoBarBase, InfoBarShowHide, InfoBarCueSheetSupport,
 	def buildPosterData(self):
 		printl("", self, "S")
 
-		mediaPath = config.plugins.dreamplex.mediafolderpath.value
+		mediaPath = config.plugins.enby.mediafolderpath.value
 		image_prefix = Singleton().getPlexInstance().getServerName().lower()
 
 		self.poster_postfix = "_poster_" + self.width + "x" + self.height + "_v2.jpg"
@@ -1550,7 +1550,7 @@ class DP_Player(Screen, InfoBarBase, InfoBarShowHide, InfoBarCueSheetSupport,
 		if not fileExists(self.whatPoster):
 			self.downloadPoster()
 
-		if config.plugins.dreamplex.lcd4linux.value:
+		if config.plugins.enby.lcd4linux.value:
 			self.preparePosterForExternalUsage()
 
 		printl("", self, "C")
@@ -1595,8 +1595,8 @@ class DP_Player(Screen, InfoBarBase, InfoBarShowHide, InfoBarCueSheetSupport,
 	def preparePosterForExternalUsage(self):
 		printl("", self, "S")
 
-		tempPath = config.plugins.dreamplex.logfolderpath.value
-		self.tempPoster = tempPath + "dreamplex.jpg"
+		tempPath = config.plugins.enby.logfolderpath.value
+		self.tempPoster = tempPath + "enby.jpg"
 
 		from shutil import copy2
 

@@ -169,10 +169,11 @@ def getViewsFromSkinParams(myType):
 			# if we are mandatory we stop here
 			if defaultParams["settings"][setting] == "mandatory" and value is None:
 				skinDebugMode = translateValues(getSkinDebugMode())
-				if config.plugins.dreamplex.skin.value != "default" and not skinDebugMode:
-					config.plugins.dreamplex.skin.value = "default"
-					config.plugins.dreamplex.skin.save()
+				if config.plugins.enby.skin.value != "default" and not skinDebugMode:
+					config.plugins.enby.skin.value = "default"
+					config.plugins.enby.skin.save()
 					configfile.save()
+					# Is this translatable?
 					Notifications.AddNotification(MessageBox, "DreamPlex crashed due to a skin error!\nSwitching back to default in settings.\n", type=MessageBox.TYPE_INFO, timeout=10)
 				else:
 					printl("this value: " + str(value) + "is misssing ....", "DP_ViewFactory::getViewsFromSkinParams", "D")

@@ -1,6 +1,6 @@
 SUBDIRS = skins
 
-installdir = $(libdir)/enigma2/python/Plugins/Extensions/DreamPlex
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/Enby
 
 install_PYTHON = *.py
 

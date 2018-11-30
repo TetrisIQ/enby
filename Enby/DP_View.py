@@ -175,7 +175,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 		self.currentViewType = str(self.viewParams["settings"]["type"])
 
 		self.stillPictureEnabledInView = self.viewParams["settings"]["backdropVideos"]
-		self.stillPictureEnabledInSettings = config.plugins.dreamplex.useBackdropVideos.value
+		self.stillPictureEnabledInSettings = config.plugins.enby.useBackdropVideos.value
 
 		self.plexInstance = Singleton().getPlexInstance()
 
@@ -186,7 +186,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 
 		self.skinResulution = getSkinResolution()
 
-		self.usePicCache = config.plugins.dreamplex.usePicCache.value
+		self.usePicCache = config.plugins.enby.usePicCache.value
 
 		self.noneDirectoryElementsList = getNoneDirectoryElements()
 		self.directoryElementsList = getDefaultDirectoryElementsList()
@@ -231,10 +231,10 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 		#DP_View.setListViewElementsCount("DPS_ViewList")
 
 		# get needed config parameters
-		self.mediaPath = config.plugins.dreamplex.mediafolderpath.value
-		self.fastScroll = config.plugins.dreamplex.fastScroll.value
-		self.liveTvInViews = config.plugins.dreamplex.liveTvInViews.value
-		self.startWithFilterMode = config.plugins.dreamplex.startWithFilterMode.value
+		self.mediaPath = config.plugins.enby.mediafolderpath.value
+		self.fastScroll = config.plugins.enby.fastScroll.value
+		self.liveTvInViews = config.plugins.enby.liveTvInViews.value
+		self.startWithFilterMode = config.plugins.enby.startWithFilterMode.value
 
 		# get data from plex library
 		self.image_prefix = self.plexInstance.getServerName().lower()
@@ -402,7 +402,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 		# now we try to enable stillPictureSupport
 		if self.stillPictureEnabledInSettings and self.stillPictureEnabledInView:
 			# if liveTv is not stopped on startup we have to do so now
-			if not config.plugins.dreamplex.stopLiveTvOnStartup.value:
+			if not config.plugins.enby.stopLiveTvOnStartup.value:
 				self.session.nav.stopService()
 
 			try:
@@ -648,7 +648,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 
 		else:
 			self.sessionData = False
-			if not config.plugins.dreamplex.stopLiveTvOnStartup.value and self.liveTvInViews:
+			if not config.plugins.enby.stopLiveTvOnStartup.value and self.liveTvInViews:
 				self.restoreLiveTv()
 
 		printl("", self, "C")
@@ -815,7 +815,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 			serverID = self.serverConfig.id.value
 			printl("serverID: " + str(serverID), self, "D")
 
-			self.location = config.plugins.dreamplex.configfolderpath.value + "mountMappings"
+			self.location = config.plugins.enby.configfolderpath.value + "mountMappings"
 			checkXmlFile(self.location)
 			tree = getXmlContent(self.location)
 
@@ -1322,7 +1322,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 	def onToggleView(self):
 		printl("", self, "S")
 
-		if config.plugins.dreamplex.useBackdropVideos.value and self.loadedStillPictureLib:
+		if config.plugins.enby.useBackdropVideos.value and self.loadedStillPictureLib:
 			self.stopBackdropVideo()
 		cause = (DP_View.ON_CLOSED_CAUSE_CHANGE_VIEW, )
 		self.leaveNow(cause)
@@ -1418,7 +1418,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 			# we need this for onEnter-func in child lib
 
 			if entryData['tagType'] == "Track" or entryData['tagType'] == "Video":
-				if config.plugins.dreamplex.useBackdropVideos.value and self.loadedStillPictureLib:
+				if config.plugins.enby.useBackdropVideos.value and self.loadedStillPictureLib:
 					self.stopBackdropVideo()
 
 				currentIndex = self["listview"].getIndex()
@@ -1525,7 +1525,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 		if self.detailsPaneVisible:
 			self.hideDetails()
 
-		if config.plugins.dreamplex.playTheme.value:
+		if config.plugins.enby.playTheme.value:
 			printl("stoping theme playback", self, "D")
 			if self.themeMusicIsRunning:
 				self.session.nav.stopService()
@@ -1561,7 +1561,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 			self.stopBackdropVideo()
 
 		# this seems to be uneeded
-		# if not config.plugins.dreamplex.stopLiveTvOnStartup.value and cause is None:
+		# if not config.plugins.enby.stopLiveTvOnStartup.value and cause is None:
 		# 	self.restoreLiveTv()
 
 		if cause is not None:
@@ -1618,7 +1618,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 		printl("", self, "S")
 		#printl("listViewList: " + str(listViewList), self, "S")
 		newList = []
-		undefinedIcon = loadPicture('/usr/lib/enigma2/python/Plugins/Extensions/DreamPlex/skins/default/images/picreset.png')
+		undefinedIcon = loadPicture('/usr/lib/enigma2/python/Plugins/Extensions/Enby/skins/default/images/picreset.png')
 
 		for listViewEntry in listViewList:
 			viewState = str(listViewEntry[3])
@@ -1890,7 +1890,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 		self["tag"].setText("Name:")
 		self["shortDescription"].setText(self.details.get("title", " ").encode('utf-8'))
 
-		self.whatPoster = "/usr/lib/enigma2/python/Plugins/Extensions/DreamPlex/skins/" + config.plugins.dreamplex.skin.value + "/all/folder-fs8.png"
+		self.whatPoster = "/usr/lib/enigma2/python/Plugins/Extensions/Enby/skins/" + config.plugins.enby.skin.value + "/all/folder-fs8.png"
 		self["poster"].show()
 
 		printl("", self, "C")
@@ -2457,7 +2457,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 	def resetCurrentImages(self):
 		printl("", self, "S")
 
-		ptr = "/usr/lib/enigma2/python/Plugins/Extensions/DreamPlex/skins/" + config.plugins.dreamplex.skin.value + "/images/picreset.png"
+		ptr = "/usr/lib/enigma2/python/Plugins/Extensions/Enby/skins/" + config.plugins.enby.skin.value + "/images/picreset.png"
 
 		if self.viewParams["elements"]["poster"]["visible"]:
 			if self.resetPoster:
@@ -2801,7 +2801,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 	def resetBackdropImage(self):
 		printl("", self, "S")
 
-		ptr = "/usr/lib/enigma2/python/Plugins/Extensions/DreamPlex/skins/" + config.plugins.dreamplex.skin.value + "/images/picreset.png"
+		ptr = "/usr/lib/enigma2/python/Plugins/Extensions/Enby/skins/" + config.plugins.enby.skin.value + "/images/picreset.png"
 		self["backdrop"].instance.setPixmapFromFile(ptr)
 
 		printl("", self, "C")
@@ -3091,7 +3091,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 		if not self.usePicCache:
 			self.pname = "temp"
 			self.bname = "temp"
-			self.mediaPath = config.plugins.dreamplex.logfolderpath.value
+			self.mediaPath = config.plugins.enby.logfolderpath.value
 
 		printl("bname: " + str(self.bname), self, "D")
 		printl("pname: " + str(self.pname), self, "D")
@@ -3138,7 +3138,7 @@ class DP_View(DPH_Screen, DPH_ScreenHelper, DPH_MultiColorFunctions, DPH_Filter)
 	def closePlugin(self):
 		printl("", self, "S")
 
-		if config.plugins.dreamplex.useBackdropVideos.value and self.loadedStillPictureLib:
+		if config.plugins.enby.useBackdropVideos.value and self.loadedStillPictureLib:
 			self.stopBackdropVideo()
 
 		super(DP_View,self).closePlugin()
